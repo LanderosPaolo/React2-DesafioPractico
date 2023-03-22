@@ -4,10 +4,11 @@ import { useContext } from 'react';
 import PizzaContext from '../Context';
 import { ListGroup } from 'react-bootstrap';
 import '../stylesheets/PizzaCards.css';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const PizzaCards = () => {
     const { pizzas, handleClick } = useContext(PizzaContext);
+    const navigate = useNavigate();
 
     return (
         <div className="card-container d-flex flex-wrap justify-content-center">
@@ -29,9 +30,12 @@ const PizzaCards = () => {
                             Precio: ${p.price}
                         </p>
                         <div className='d-flex justify-content-around'>
-                            <Link to={`/pizza/${p.id}`}>
-                                <Button variant="info" className='fw-bold'>Ver más👀</Button>
-                            </Link>
+                            <Button
+                                onClick={() => navigate(`/pizza/${p.id}`)}
+                                variant="info"
+                                className='fw-bold'>
+                                Ver más👀
+                            </Button>
                             <Button variant="danger" className='fw-bold' onClick={() => handleClick(p)}>
                                 Añadir🛒
                             </Button>
